@@ -1,0 +1,605 @@
+@import url(https://fonts.googleapis.com/css?family=Loved+by+the+King);
+html, body {
+  background: #074777;
+  width: 100%;
+  height: 100hv;
+  overflow: hidden;
+  font-family: "Loved by the King", cursive;
+}
+
+.bubbly-button {
+
+  display: inline-block;
+  font-size: 38px;
+  padding: 5px 20px;
+  -webkit-appearance: none;
+  appearance: none;
+  background-color: #ff0081;
+  color: #fff;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  transition: transform ease-in 0.1s, box-shadow ease-in 0.25s;
+  box-shadow: 0 2px 25px rgba(255, 0, 130, 0.5);
+}
+.bubbly-button:focus {
+  outline: 0;
+}
+
+
+div[class*=-ball] {
+  --pokeball-size: 300px;
+  width: var(--pokeball-size);
+  height: var(--pokeball-size);
+  position: relative;
+  margin: 10vh auto;
+}
+@media (max-height: 500px) {
+  div[class*=-ball] {
+    --pokeball-size: calc(300px / 1.5);
+    width: var(--pokeball-size);
+    height: var(--pokeball-size);
+  }
+}
+@media (max-width: 500px) and (min-width: 350px) {
+  div[class*=-ball] {
+    --pokeball-size: calc(300px / 1.5);
+    width: var(--pokeball-size);
+    height: var(--pokeball-size);
+  }
+}
+@media (max-width: 350px) {
+  div[class*=-ball] {
+    --pokeball-size: calc(300px / 1.8);
+    width: var(--pokeball-size);
+    height: var(--pokeball-size);
+  }
+}
+div[class*=-ball] .border {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  border-radius: 100%;
+  background: transparent;
+  border: calc(var(--pokeball-size) * 0.04) solid #1e1e1e;
+  box-shadow: inset 5px 10px 0px rgba(5, 47, 72, 0.1), inset -13px -20px 0px rgba(5, 47, 72, 0.2);
+  z-index: 10;
+  -webkit-animation-name: pokeWiggle;
+          animation-name: pokeWiggle;
+  -webkit-animation-duration: 1.25s;
+          animation-duration: 1.25s;
+  -webkit-animation-fill-mode: both;
+          animation-fill-mode: both;
+  -webkit-animation-iteration-count: infinite;
+          animation-iteration-count: infinite;
+}
+div[class*=-ball] .border:before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: calc(var(--pokeball-size) * 0.06);
+  background: #1e1e1e;
+  top: calc(50% - calc(var(--pokeball-size) * 0.06 / 2));
+}
+div[class*=-ball] .border .inner {
+  width: calc(var(--pokeball-size) / 3.5);
+  height: calc(var(--pokeball-size) / 3.5);
+  background: #fff;
+  border-radius: 100%;
+  border: calc(var(--pokeball-size) * 0.04) solid #1e1e1e;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 2px 2px 0 2px rgba(30, 30, 30, 0.2);
+  z-index: 10;
+}
+div[class*=-ball] .border .inner:before {
+  content: "";
+  width: calc(var(--pokeball-size) / 6);
+  height: calc(var(--pokeball-size) / 6);
+  background: #fff;
+  border-radius: 100%;
+  border: calc(var(--pokeball-size) * 0.025) solid #1e1e1e;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+div[class*=-ball] .ball {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  border-radius: 100%;
+  border: calc(var(--pokeball-size) * 0.04) solid transparent;
+  background: linear-gradient(#2b2b2b 0%, #2b2b2b 50%, #fff 50%, #fff 100%);
+  overflow: hidden;
+  z-index: 5;
+  -webkit-animation-name: pokeWiggle;
+          animation-name: pokeWiggle;
+  -webkit-animation-duration: 1.25s;
+          animation-duration: 1.25s;
+  -webkit-animation-fill-mode: both;
+          animation-fill-mode: both;
+  -webkit-animation-iteration-count: infinite;
+          animation-iteration-count: infinite;
+}
+div[class*=-ball] .shadow {
+  background: linear-gradient(100deg, rgba(5, 47, 72, 0.75) 0%, rgba(5, 47, 72, 0) 100%);
+  width: calc(var(--pokeball-size) * 1.5);
+  height: calc(var(--pokeball-size) / 3);
+  border-radius: 100%;
+  position: absolute;
+  bottom: calc(var(--pokeball-size) / 8 * -1);
+  left: calc(var(--pokeball-size) / 5);
+  transform: rotate(-3deg);
+  z-index: 2;
+  -webkit-animation-name: shadowWiggle;
+          animation-name: shadowWiggle;
+  -webkit-animation-duration: 1.25s;
+          animation-duration: 1.25s;
+  -webkit-animation-fill-mode: both;
+          animation-fill-mode: both;
+  -webkit-animation-iteration-count: infinite;
+          animation-iteration-count: infinite;
+}
+
+#pokeball:checked ~ .toggle label[for=pokeball] {
+  background: #073f60;
+}
+
+#pokeball:checked ~ .poke-ball .ball {
+  background: linear-gradient(#912324 0%, #912324 50%, #fff 50%, #fff 100%);
+}
+
+#greatball:checked ~ .toggle label[for=greatball] {
+  background: #073f60;
+}
+
+#greatball:checked ~ .poke-ball .ball {
+  background: linear-gradient(#155AC7 0%, #155AC7 50%, #fff 50%, #fff 100%);
+}
+#greatball:checked ~ .poke-ball .ball:before, #greatball:checked ~ .poke-ball .ball:after {
+  content: "";
+  position: absolute;
+  border-top: calc(var(--pokeball-size) / 4) solid #912324;
+  border-left: calc(var(--pokeball-size) / 8 / 2) solid transparent;
+  border-right: calc(var(--pokeball-size) / 8 / 2) solid transparent;
+  width: calc(var(--pokeball-size) / 8);
+  top: 5%;
+}
+#greatball:checked ~ .poke-ball .ball:before {
+  left: 10%;
+  transform: rotate(-50deg);
+}
+#greatball:checked ~ .poke-ball .ball:after {
+  right: 10%;
+  transform: rotate(50deg);
+}
+
+#ultraball:checked ~ .toggle label[for=ultraball] {
+  background: #073f60;
+}
+
+#ultraball:checked ~ .poke-ball .ball {
+  background: linear-gradient(#FBB61A 0%, #FBB61A 50%, #fff 50%, #fff 100%);
+}
+#ultraball:checked ~ .poke-ball .ball .extras:before {
+  content: "";
+  position: absolute;
+  width: 45%;
+  height: 40%;
+  background: #444;
+  left: 50%;
+  top: 7%;
+  border-radius: 4em 4em 0 0;
+  transform: translateX(-50%);
+  z-index: -10;
+}
+#ultraball:checked ~ .poke-ball .ball:before, #ultraball:checked ~ .poke-ball .ball:after {
+  content: "";
+  position: absolute;
+  width: var(--pokeball-size);
+  height: calc((var(--pokeball-size) / 1.66) - 3%);
+  bottom: calc((var(--pokeball-size) / 2) + 3%);
+  border-radius: var(--pokeball-size) var(--pokeball-size) 0 0;
+  z-index: 5;
+}
+#ultraball:checked ~ .poke-ball .ball:before {
+  box-shadow: inset 20px 0 0 #444, inset -20px 0 0 #444;
+}
+
+#masterball:checked ~ .toggle label[for=masterball] {
+  background: #073f60;
+}
+
+#masterball:checked ~ .poke-ball .ball {
+  background: linear-gradient(#6322A9 0%, #6322A9 50%, #fff 50%, #fff 100%);
+}
+#masterball:checked ~ .poke-ball .ball:before, #masterball:checked ~ .poke-ball .ball:after {
+  content: "";
+  position: absolute;
+  width: calc(var(--pokeball-size) / 2.25);
+  height: calc(var(--pokeball-size) / 2.25);
+  background: #BF0498;
+  border-radius: 100%;
+  top: -1.25em;
+}
+#masterball:checked ~ .poke-ball .ball:before {
+  left: -2em;
+  transform: rotate(-50deg);
+}
+#masterball:checked ~ .poke-ball .ball:after {
+  right: -2em;
+  transform: rotate(50deg);
+}
+#masterball:checked ~ .poke-ball .ball .extras:before {
+  content: "M";
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, 90%);
+  text-align: center;
+  color: white;
+  font-family: "Hind";
+  font-weight: 700;
+  font-size: 2.5em;
+}
+
+#loveball:checked ~ .toggle label[for=loveball] {
+  background: #073f60;
+}
+
+#loveball:checked ~ .poke-ball .ball {
+  background: linear-gradient(#F6558E 0%, #F6558E 50%, #fff 50%, #fff 100%);
+}
+#loveball:checked ~ .poke-ball .ball .extras {
+  position: fixed;
+  width: 55%;
+  height: 50%;
+  top: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+}
+#loveball:checked ~ .poke-ball .ball .extras:before, #loveball:checked ~ .poke-ball .ball .extras:after {
+  position: absolute;
+  content: "";
+  left: 50%;
+  width: 50%;
+  height: 90%;
+  background: #FFA4C4;
+  border-radius: calc(var(--pokeball-size) / 6) calc(var(--pokeball-size) / 6) 0 0;
+  transform: rotate(-45deg);
+  transform-origin: 0 100%;
+}
+#loveball:checked ~ .poke-ball .ball .extras:after {
+  left: 0;
+  transform: rotate(45deg);
+  transform-origin: 100% 100%;
+}
+#loveball:checked ~ .poke-ball .ball .moar-extras {
+  position: fixed;
+  width: 55%;
+  height: 50%;
+  top: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+}
+#loveball:checked ~ .poke-ball .ball .moar-extras:before, #loveball:checked ~ .poke-ball .ball .moar-extras:after {
+  position: absolute;
+  content: "";
+  left: 50%;
+  width: 50%;
+  height: 90%;
+  background: #FFA4C4;
+  border-radius: calc(var(--pokeball-size) / 6) calc(var(--pokeball-size) / 6) 0 0;
+  transform: rotate(-45deg);
+  transform-origin: 0 100%;
+  box-shadow: 0px 0px 0px calc(var(--pokeball-size) * 0.03) #fff;
+}
+#loveball:checked ~ .poke-ball .ball .moar-extras:after {
+  left: 0;
+  transform: rotate(45deg);
+  transform-origin: 100% 100%;
+}
+#loveball:checked ~ .poke-ball .ball .even-moar-extras:before {
+  content: "";
+  position: absolute;
+  width: 7%;
+  height: 10%;
+  border-radius: 100%;
+  background: #fff;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 70%;
+  z-index: 10;
+}
+
+#premierball:checked ~ .toggle label[for=premierball] {
+  background: #073f60;
+}
+
+#premierball:checked ~ .poke-ball .border:before {
+  background: #E33C47;
+}
+#premierball:checked ~ .poke-ball .border .inner {
+  border-color: #E33C47;
+  box-shadow: none;
+}
+#premierball:checked ~ .poke-ball .border .inner:before {
+  border-color: rgba(30, 30, 30, 0.7);
+}
+#premierball:checked ~ .poke-ball .ball {
+  background: #fff;
+}
+
+#levelball:checked ~ .toggle label[for=levelball] {
+  background: #073f60;
+}
+
+#levelball:checked ~ .poke-ball .ball {
+  background: linear-gradient(#3E3838 0%, #3E3838 15%, #E9C025 15%, #E9C025 50%, #fff 50%, #fff 100%);
+}
+#levelball:checked ~ .poke-ball .ball .extras:before, #levelball:checked ~ .poke-ball .ball .extras:after {
+  content: "V";
+  font-family: "Josefin Sans";
+  font-weight: 900;
+  position: absolute;
+  text-align: center;
+  font-size: 4.5em;
+  color: #C51B1B;
+  width: 100%;
+  top: 6%;
+}
+#levelball:checked ~ .poke-ball .ball .extras:before {
+  -webkit-text-fill-color: #C51B1B;
+  -webkit-text-stroke-width: calc(var(--pokeball-size) / 30);
+  -webkit-text-stroke-color: #1e1e1e;
+}
+#levelball:checked ~ .poke-ball .ball .extras:after {
+  -webkit-text-fill-color: #C51B1B;
+  -webkit-text-stroke-width: calc(var(--pokeball-size) / 30 / 2);
+  -webkit-text-stroke-color: #C51B1B;
+}
+
+#diveball:checked ~ .toggle label[for=diveball] {
+  background: #073f60;
+}
+
+#diveball:checked ~ .poke-ball .ball {
+  background: linear-gradient(#fff 0%, #fff 40%, #7DC6FF 40%, #7DC6FF 80%, #175FB0 80%);
+}
+#diveball:checked ~ .poke-ball .ball .extras {
+  width: 100%;
+}
+#diveball:checked ~ .poke-ball .ball .extras:before {
+  content: "";
+  position: absolute;
+  top: calc(50% - (var(--pokeball-size) / 3.5 / 2));
+  left: calc(var(--pokeball-size) / 4 / 2 * -0.5);
+  width: calc(var(--pokeball-size) / 4);
+  height: calc(var(--pokeball-size) / 3.5);
+  border-radius: 100%;
+  background: #7DC6FF;
+}
+#diveball:checked ~ .poke-ball .ball .extras:after {
+  content: "";
+  position: absolute;
+  top: calc(50% - (var(--pokeball-size) / 3.5 / 2));
+  right: calc(var(--pokeball-size) / 4 / 2 * -0.5);
+  width: calc(var(--pokeball-size) / 4);
+  height: calc(var(--pokeball-size) / 3.5);
+  border-radius: 100%;
+  background: #7DC6FF;
+}
+#diveball:checked ~ .poke-ball .ball .moar-extras {
+  width: 100%;
+}
+#diveball:checked ~ .poke-ball .ball .moar-extras:before {
+  content: "";
+  position: absolute;
+  top: calc(50% - (var(--pokeball-size) / 2 / 2));
+  left: calc(50% - (var(--pokeball-size) / 2.5 / 2));
+  width: calc(var(--pokeball-size) / 2.5);
+  height: calc(var(--pokeball-size) / 2);
+  border-radius: 100%;
+  background: #7DC6FF;
+}
+#diveball:checked ~ .poke-ball .ball .even-moar-extras {
+  width: 100%;
+}
+#diveball:checked ~ .poke-ball .ball .even-moar-extras:before, #diveball:checked ~ .poke-ball .ball .even-moar-extras:after {
+  content: "";
+  position: absolute;
+  top: calc((var(--pokeball-size) / 4.05));
+  width: calc(var(--pokeball-size) / 5.7);
+  height: calc(var(--pokeball-size) / 4.5);
+  border-radius: 100%;
+  background: #fff;
+}
+#diveball:checked ~ .poke-ball .ball .even-moar-extras:before {
+  left: calc(var(--pokeball-size) / 6.8);
+}
+#diveball:checked ~ .poke-ball .ball .even-moar-extras:after {
+  right: calc(var(--pokeball-size) / 6.8);
+}
+#diveball:checked ~ .poke-ball .ball .and-some-moar-extras {
+  width: 100%;
+}
+#diveball:checked ~ .poke-ball .ball .and-some-moar-extras:before, #diveball:checked ~ .poke-ball .ball .and-some-moar-extras:after {
+  content: "";
+  position: absolute;
+  background: #175FB0;
+  bottom: 0;
+  width: calc(var(--pokeball-size) / 4.5);
+  height: calc(var(--pokeball-size) / 3);
+  border-radius: 100%;
+}
+#diveball:checked ~ .poke-ball .ball .and-some-moar-extras:before {
+  left: calc(var(--pokeball-size) / 20);
+}
+#diveball:checked ~ .poke-ball .ball .and-some-moar-extras:after {
+  right: calc(var(--pokeball-size) / 20);
+}
+#diveball:checked ~ .poke-ball .ball .yikes-this-is-a-lot {
+  width: 100%;
+}
+#diveball:checked ~ .poke-ball .ball .yikes-this-is-a-lot:before {
+  content: "";
+  position: absolute;
+  background: #175FB0;
+  bottom: 0;
+  left: calc(50% - (var(--pokeball-size) / 4 / 2));
+  width: calc(var(--pokeball-size) / 4);
+  height: calc(var(--pokeball-size) / 2.5);
+  border-radius: 100%;
+}
+#diveball:checked ~ .poke-ball .ball .plz-kill-me-now {
+  width: 100%;
+}
+#diveball:checked ~ .poke-ball .ball .plz-kill-me-now:before, #diveball:checked ~ .poke-ball .ball .plz-kill-me-now:after {
+  content: "";
+  position: absolute;
+  bottom: calc((var(--pokeball-size) / 7.2));
+  width: calc(var(--pokeball-size) / 8.1);
+  height: calc(var(--pokeball-size) / 4);
+  border-radius: 100%;
+  background: #7DC6FF;
+}
+#diveball:checked ~ .poke-ball .ball .plz-kill-me-now:before {
+  left: calc(var(--pokeball-size) / 3.87);
+}
+#diveball:checked ~ .poke-ball .ball .plz-kill-me-now:after {
+  right: calc(var(--pokeball-size) / 3.87);
+}
+#diveball:checked ~ .poke-ball .ball .oh-gawd-whyyy {
+  width: 100%;
+}
+#diveball:checked ~ .poke-ball .ball .oh-gawd-whyyy:before {
+  content: "";
+  position: absolute;
+  width: calc(var(--pokeball-size) / 9);
+  height: calc(var(--pokeball-size) / 7);
+  top: 5%;
+  left: calc(50% - (var(--pokeball-size) / 9 / 2));
+  border-radius: 100%;
+  background: #7DC6FF;
+}
+
+input[type=radio] {
+  position: absolute;
+  visibility: hidden;
+}
+
+.toggle {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #052F48;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  text-align: center;
+}
+@media (max-width: 500px) {
+  .toggle {
+    font-size: 0.8em;
+  }
+}
+.toggle label {
+  display: block;
+  padding: 1em 0.5em;
+  color: #fff;
+  font-size: 1.5em;
+  font-family: "Roboto";
+  font-weight: 300;
+  letter-spacing: 2px;
+  white-space: nowrap;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background 300ms ease-in-out;
+  cursor: pointer;
+}
+.toggle label:hover {
+  background: #063856;
+}
+.toggle label input {
+  margin-right: 0.5em;
+}
+
+@-webkit-keyframes pokeWiggle {
+  from {
+    transform: none;
+  }
+  20% {
+    transform: translate3d(-15%, 0, 0) rotate3d(0, 0, 1, -10deg);
+  }
+  40% {
+    transform: translate3d(15%, 0, 0) rotate3d(0, 0, 1, 5deg);
+  }
+  60% {
+    transform: translate3d(-7%, 0, 0) rotate3d(0, 0, 1, -10deg);
+  }
+  to {
+    transform: none;
+  }
+}
+
+@keyframes pokeWiggle {
+  from {
+    transform: none;
+  }
+  20% {
+    transform: translate3d(-15%, 0, 0) rotate3d(0, 0, 1, -10deg);
+  }
+  40% {
+    transform: translate3d(15%, 0, 0) rotate3d(0, 0, 1, 5deg);
+  }
+  60% {
+    transform: translate3d(-7%, 0, 0) rotate3d(0, 0, 1, -10deg);
+  }
+  to {
+    transform: none;
+  }
+}
+@-webkit-keyframes shadowWiggle {
+  from {
+    transform: rotate(-3deg);
+  }
+  20% {
+    transform: translate3d(-2%, 0, 0) rotate(-3deg);
+  }
+  40% {
+    transform: translate3d(2%, 0, 0) rotate(-3deg);
+  }
+  60% {
+    transform: translate3d(-1%, 0, 0) rotate(-3deg);
+  }
+  to {
+    transform: rotate(-3deg);
+  }
+}
+@keyframes shadowWiggle {
+  from {
+    transform: rotate(-3deg);
+  }
+  20% {
+    transform: translate3d(-2%, 0, 0) rotate(-3deg);
+  }
+  40% {
+    transform: translate3d(2%, 0, 0) rotate(-3deg);
+  }
+  60% {
+    transform: translate3d(-1%, 0, 0) rotate(-3deg);
+  }
+  to {
+    transform: rotate(-3deg);
+  }
+}
