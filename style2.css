@@ -263,7 +263,7 @@ h2 {
 .signature {
   position: absolute;
   margin: auto;
-  bottom: 0;
+  bottom: 50px;
   top: auto;
 }
 
