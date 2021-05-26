@@ -1,10 +1,10 @@
-@import url(https://fonts.googleapis.com/css?family=Loved+by+the+King);
+@import url('https://fonts.googleapis.com/css2?family=Caveat&display=swap');
 
 body,
 html {
   background: #ff93a6;
   height: 100%;
-  font-family: "Loved by the King", cursive;
+  font-family: 'Caveat', cursive;
 }
 
 div,
