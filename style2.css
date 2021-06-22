@@ -2,7 +2,7 @@
 
 body,
 html {
-  background: #ff93a6;
+  background: #ebb0bb;
   height: 100%;
   font-family: 'Caveat', cursive;
 }
@@ -36,10 +36,10 @@ span {
 
 }
 
-h2 {
+h2, h3, h4 {
   text-transform: uppercase;
   text-align: center;
-  font-size: 3em;
+  font-size: 2em;
   color: #452211;
 }
 
