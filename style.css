@@ -1,7 +1,9 @@
 @import url(https://fonts.googleapis.com/css?family=Loved+by+the+King);
 @import url('https://fonts.googleapis.com/css2?family=Caveat&display=swap');
 html, body {
-  background: #4d94ca;
+  background-color: #FFDEE9;
+  background-image: linear-gradient(0deg, #FFDEE9 0%, #B5FFFC 100%);
+
   width: 100%;
   height: 100hv;
   overflow: hidden;
